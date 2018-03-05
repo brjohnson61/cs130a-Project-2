@@ -9,7 +9,7 @@ public:
     //Constructors, Destructors, and Operators
     AVL();
     AVL(AVL& original);
-    AVL(Node& original);
+    AVL(Node* original);
     ~AVL();
     bool operator=(AVL& rhs);
 
@@ -26,9 +26,9 @@ public:
 
     //Assignment functions
     bool searchTree(string word);
-    AVL insertNode(Node& newNode);
-    AVL insertNode(string word);
-    AVL deleteNode(string word);
+    AVL* insertNode(Node* newNode);
+    AVL* insertNode(string word);
+    AVL* deleteNode(string word);
     void rangeSearch(string upperBound, string lowerBound);
 
 private:
