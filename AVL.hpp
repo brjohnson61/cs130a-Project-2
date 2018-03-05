@@ -8,7 +8,7 @@ class AVL{
 public:
     //Constructors, Destructors, and Operators
     AVL();
-    AVL(AVL& original);
+    AVL(AVL* original);
     AVL(Node* original);
     ~AVL();
     bool operator=(AVL& rhs);
