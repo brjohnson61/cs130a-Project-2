@@ -13,7 +13,7 @@ public:
     ~AVL();
     bool operator=(AVL& rhs);
 
-    //Getters, Setters
+    //Getters, Setters, Helper Functions
     AVL* getRight();
     void setRight(AVL* right);
     AVL* getLeft();
@@ -22,6 +22,7 @@ public:
     void setRoot(Node* root);
     unsigned int getHeight();
     int getBalance();
+    void balanceTree();
     
 
     //Assignment functions
@@ -29,7 +30,8 @@ public:
     AVL* insertNode(Node* newNode);
     AVL* insertNode(string word);
     AVL* deleteNode(string word);
-    void rangeSearch(string upperBound, string lowerBound);
+    void sortTree();
+    void rangeSearchTree(string upperBound, string lowerBound);
 
 private:
     //Private members

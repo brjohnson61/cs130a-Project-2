@@ -1,5 +1,7 @@
 #include "AVL.hpp"
 #include <string>
+#include <stdio.h>
+#include <iostream>
 
 
 AVL::AVL(){
@@ -66,7 +68,22 @@ AVL* AVL::getRight(){
 
 //TODO: make height and balance work as well
 void AVL::setRight(AVL* right){
+    unsigned int lheight = 0;
+    unsigned int rheight = 0;
     this->right = right;
+    if(right->getHeight() != NULL){
+        rheight = right->getHeight();
+    }
+    if(this->left != NULL){
+        lheight = this->left->getHeight();
+    }
+    if(rheight > lheight){
+        this->height = rheight + 1;
+    }
+    else{
+        this->height = lheight + 1;
+    }
+    this->balance = rheight - lheight;
 }
 
 AVL* AVL::getLeft(){
@@ -74,9 +91,30 @@ AVL* AVL::getLeft(){
 }
 
 //TODO: make height and balance work as well
-void AVL::setLeft(AVL* left){
-    this->left = left;
-}
+// void AVL::setLeft(AVL* left){
+//     int lheight = 0;
+//     int rheight = 0;
+//     this->left = left;
+//     if(left->getHeight() != NULL){
+//         lheight = left->getHeight();
+//     }
+//     else{
+//         lheight = -1;
+//     }
+//     if(this->right != NULL){
+//         rheight = this->right->getHeight();
+//     }
+//     else{
+//         rheight = -1;
+//     }
+//     if(rheight > lheight){
+//         this->height = rheight + 1;
+//     }
+//     else{
+//         this->height = lheight + 1;
+//     }
+//     this->balance = rheight - lheight;
+// }
 
 Node* AVL::getRoot(){
     return this->root;
@@ -95,7 +133,31 @@ int AVL::getBalance(){
 }
 
 bool AVL::searchTree(string word){
-    return false;
+    if(this->root == NULL){
+        return false;
+    }
+    else{
+        if(this->root->getWord() == word){
+            return true;
+        }
+        else if(this->root->getWord() < word){
+            if(this->right == NULL){
+                return false;
+            }
+            else{
+                return this->right->searchTree(word);
+            }
+        }
+        else{
+            if(this->left == NULL){
+                return false;
+            }
+            else{
+                return this->left->searchTree(word);
+            }
+        }
+    }
+    
 }
 
 AVL* AVL::insertNode(Node* newNode){
@@ -110,7 +172,27 @@ AVL* AVL::deleteNode(string word){
     return this;
 }
 
-void rangeSearch(string upperBound, string lowerBound){
+void AVL::sortTree(){
+    if(this->left != NULL){
+        this->left->sortTree();
+    }
+    outputToFile(this->root->getWord(), "output.txt");
+    if(this->right != NULL){
+        this->right->sortTree();
+    }
+}
 
+void AVL::rangeSearchTree(string upperBound, string lowerBound){
+    if(this->root->getWord() >= upperBound && this->root->getWord() <= lowerBound){
+        this->left->rangeSearchTree(upperBound, lowerBound);
+        cout << this->root->getWord() << endl;
+        this->right->rangeSearchTree(upperBound, lowerBound);
+    }
+    else if(this->root->getWord() >= lowerBound){
+        this->left->rangeSearchTree(upperBound, lowerBound);
+    }
+    else{
+        this->right->rangeSearchTree(upperBound, lowerBound);
+    }
 }
 
