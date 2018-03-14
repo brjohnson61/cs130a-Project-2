@@ -206,10 +206,10 @@ void AVL::insertNode(string word){
     this->balance = this->right->getHeight() - this->left->getHeight();
 
     if(this->balance < -1){
-
+        if
     }
     else{
-        
+
     }
 
 }
