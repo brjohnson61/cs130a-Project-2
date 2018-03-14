@@ -39,6 +39,14 @@ AVL::AVL(Node* original){
     this->root = new Node(original);
 }
 
+AVL::AVL(string& word){
+    this->balance = 0;
+    this->height = 0;
+    this->right = NULL;
+    this->left = NULL;
+    this->root = new Node(word);
+}
+
 AVL::~AVL(){
     delete this->root;
     if(this->right != NULL){
@@ -124,11 +132,17 @@ void AVL::setRoot(Node* root){
     this->root = root;
 }
 
-unsigned int AVL::getHeight(){
+int AVL::getHeight(){
+    if(this->root == NULL){
+        return -1;
+    }
     return this->height;
 }
 
 int AVL::getBalance(){
+    if(this->root == NULL){
+        return 0;
+    }
     return this->balance;
 }
 
@@ -160,12 +174,44 @@ bool AVL::searchTree(string word){
     
 }
 
-AVL* AVL::insertNode(Node* newNode){
-    return this;
-}
+void AVL::insertNode(string word){
+    if(this->root == NULL){
+        this->root = new Node(word);
+    }
+    else{
+        if(this->root->getWord() > word){
+            if(this->right == NULL){
+                this->right = new AVL();
+            }
+            this->right->insertNode(word);
+        }
+        if(this->root->getWord() == word){
+            this->root->increaseCount();
+        }
+        else{
+            if(this->left == NULL){
+                this->left = new AVL();
+            }
+            this->left->insertNode(word);
+        }
+    }
 
-AVL* AVL::insertNode(string word){
-    return this;
+    if(this->right->getHeight() > this->left->getHeight()){
+        this->height = this->right->getHeight() + 1;
+    }
+    else{
+        this->height = this->left->getHeight() + 1;
+    }
+
+    this->balance = this->right->getHeight() - this->left->getHeight();
+
+    if(this->balance < -1){
+
+    }
+    else{
+        
+    }
+
 }
 
 AVL* AVL::deleteNode(string word){

@@ -10,6 +10,7 @@ public:
     AVL();
     AVL(AVL* original);
     AVL(Node* original);
+    AVL(string& word);
     ~AVL();
     bool operator=(AVL& rhs);
 
@@ -20,15 +21,14 @@ public:
     void setLeft(AVL* left);
     Node* getRoot();
     void setRoot(Node* root);
-    unsigned int getHeight();
+    int getHeight();
     int getBalance();
     void balanceTree();
     
 
     //Assignment functions
     bool searchTree(string word);
-    AVL* insertNode(Node* newNode);
-    AVL* insertNode(string word);
+    void insertNode(string word);
     AVL* deleteNode(string word);
     void sortTree();
     void rangeSearchTree(string upperBound, string lowerBound);
@@ -36,7 +36,7 @@ public:
 private:
     //Private members
     int balance;
-    unsigned int height;
+    int height;
     AVL* right;
     AVL* left;
     Node* root;
