@@ -12,12 +12,13 @@ class BTreeNode {
     public:
         BTreeNode();
         int searchNode(Node node);
+        bool insertNode(Node node)
         void incrementNumKeys();
         ~BTreeNode();
 
     private:
         Node* keys;
-        BTree4Node** children;
+        BTreeNode** children;
         bool isLeaf;
         int numKeys;
 

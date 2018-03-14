@@ -1,21 +1,21 @@
-#ifndef BTree4_hpp
-#define BTree4_hpp
+#ifndef BTree5_hpp
+#define BTree5_hpp
 
 #include <stdio.h>
 #include <string>
 
 using namespace std;
 
-class BTree4 {
+class BTree5 {
     public: 
-        BTree4();
+        BTree5();
         BTreeNode* getRoot();
-        void insertWord(string word, BTreeNode* root);
+        void insertWord(string word, BTreeNode* root);S
         void deleteWord(string word, BTreeNode* root);
         BTreeNode* searchWord(string word);
         void sortWords();
         void rangeSort(string word1, string word2);
-        ~BTree4();
+        ~BTree5();
 
 
     private:
