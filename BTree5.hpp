@@ -17,6 +17,7 @@ class BTree5 {
         void sortWords(BTreeNode* root);
         void rangeSearch(string word1, string word2);
         void balanceNode(BTreeNode* root);
+        void getHeight(BTreeNode* root, int depth);
         ~BTree5();
 
 
