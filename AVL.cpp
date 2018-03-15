@@ -75,24 +75,24 @@ AVL* AVL::getRight(){
 }
 
 //TODO: make height and balance work as well
-void AVL::setRight(AVL* right){
-    unsigned int lheight = 0;
-    unsigned int rheight = 0;
-    this->right = right;
-    if(right->getHeight() != NULL){
-        rheight = right->getHeight();
-    }
-    if(this->left != NULL){
-        lheight = this->left->getHeight();
-    }
-    if(rheight > lheight){
-        this->height = rheight + 1;
-    }
-    else{
-        this->height = lheight + 1;
-    }
-    this->balance = rheight - lheight;
-}
+// void AVL::setRight(AVL* right){
+//     unsigned int lheight = 0;
+//     unsigned int rheight = 0;
+//     this->right = right;
+//     if(right->getHeight() != NULL){
+//         rheight = right->getHeight();
+//     }
+//     if(this->left != NULL){
+//         lheight = this->left->getHeight();
+//     }
+//     if(rheight > lheight){
+//         this->height = rheight + 1;
+//     }
+//     else{
+//         this->height = lheight + 1;
+//     }
+//     this->balance = rheight - lheight;
+// }
 
 AVL* AVL::getLeft(){
     return this->left;
@@ -206,7 +206,7 @@ void AVL::insertNode(string word){
     this->balance = this->right->getHeight() - this->left->getHeight();
 
     if(this->balance < -1){
-        if
+
     }
     else{
 
