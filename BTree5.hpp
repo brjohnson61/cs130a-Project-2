@@ -3,6 +3,7 @@
 
 #include <stdio.h>
 #include <string>
+#include "BTreeNode.hpp"
 
 using namespace std;
 
@@ -10,11 +11,11 @@ class BTree5 {
     public: 
         BTree5();
         BTreeNode* getRoot();
-        void insertWord(string word, BTreeNode* root);S
+        void insertWord(string word, BTreeNode* root);
         void deleteWord(string word, BTreeNode* root);
         BTreeNode* searchWord(string word);
-        void sortWords();
-        void rangeSort(string word1, string word2);
+        void sortWords(BTreeNode* root);
+        void rangeSearch(string word1, string word2);
         ~BTree5();
 
 

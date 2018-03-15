@@ -1,7 +1,8 @@
-#include "BTree4.hpp"
+#include "BTree5.hpp"
 #include <stdio.h>
 #include <string>
 #include<stdio.h>
+#include <iostream>
 
 using namespace std;
 
@@ -26,7 +27,7 @@ void BTree5::insertWord(string word, BTreeNode* root){
             }else if (root->keys[0] == temp){
                 root->keys[0].increaseCount();
             }else if (root->keys[1] > temp){
-                insertWord(word, root->childern[1]);
+                insertWord(word, root->children[1]);
             }else if (root->keys[1] == temp){
                 root->keys[1].increaseCount();
             }else if (root->keys[2] > temp){
@@ -38,7 +39,7 @@ void BTree5::insertWord(string word, BTreeNode* root){
             }else if (root->keys[3] == temp){
                 root->keys[3].increaseCount();
             }else {
-                insertWord(word, root->children[4])
+                insertWord(word, root->children[4]);
             }
         }else{
             if (root->numKeys == 4){
@@ -59,28 +60,11 @@ void BTree5::deleteWord(string word, BTreeNode* root){
 
 void BTree5::sortWords(BTreeNode* root){
     if (root != nullptr){
-        sortWords(root->children[0]);
-        if (root->key[0] != null){
-            cout << root->key[0].getWord();
-            sortWords(root->children[1]);
+        for (int i= 0; i<root->numKeys; i++){
+            sortWords(root->children[i]);
+            cout << root->keys[i].getWord() << endl;
         }
-        
-        if (root->key[1] != null){
-            cout << root->key[1].getWord();
-            sortWords(root->children[2]);
-        }
-        
-       if (root->key[2] != null){
-            cout << root->key[2].getWord();
-            sortWords(root->children[3]);
-        }
-        
-        if (root->key[3] != null){
-            cout << root->key[3].getWord();
-            sortWords(root->childern[4])
-        }
-        
-        
+        sortWords(root->children[root->numKeys]);
     }
 }
 
@@ -88,7 +72,7 @@ BTreeNode* BTree5::searchWord(string word){
     return nullptr;
 }
 
-void BTree5::rangeSort(string word1, string word2){
+void BTree5::rangeSearch(string word1, string word2){
 
 }
 

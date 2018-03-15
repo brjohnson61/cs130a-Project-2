@@ -24,7 +24,7 @@ void cleanParse(string& s);
 int main(){
 
     AVL* tree = new AVL();
-    BTree4* bTree = new BTree4();
+    BTree5* bTree = new BTree5();
     string func;
     string inp1;
     string inp2;
@@ -41,7 +41,7 @@ int main(){
             cleanParse(load);
             if(load != ""){
                 tree->insertNode(load);
-                bTree->insertWord(load);
+                bTree->insertWord(load, bTree->getRoot());
                 wordCount++;
             }
         }
@@ -85,7 +85,7 @@ int main(){
                 
  
                 auto start1 = chrono::high_resolution_clock::now();  
-                bt4bool = (bTree->searchTable(inp1) != -1)? true : false;
+                bt4bool = (bTree->searchWord(inp1) != nullptr)? true : false;
                 auto finish1 = chrono::high_resolution_clock::now();
                 chrono::duration<double> elapsed1 = finish1 - start1;
                 
@@ -105,7 +105,7 @@ int main(){
                 chrono::duration<double> elapsed0 = finish0 - start0;
 
                 auto start1 = chrono::high_resolution_clock::now();
-                bTree->insertNode(inp1);
+                bTree->insertWord(inp1, bTree->getRoot());
                 auto finish1 = chrono::high_resolution_clock::now();
                 chrono::duration<double> elapsed1 = finish1 - start1;
 
@@ -122,7 +122,7 @@ int main(){
             chrono::duration<double> elapsed0 = finish0 - start0;
 
             auto start1 = chrono::high_resolution_clock::now();
-            bTree->deleteNode(inp1);
+            bTree->deleteWord(inp1, bTree->getRoot());
             auto finish1 = chrono::high_resolution_clock::now();
             chrono::duration<double> elapsed1 = finish1 - start1;
 
@@ -141,7 +141,7 @@ int main(){
             outputToFile("", "output.txt");
 
             auto start1 = chrono::high_resolution_clock::now();
-            bTree->sortTable();
+            bTree->sortWords(bTree->getRoot());
             auto finish1 = chrono::high_resolution_clock::now();
             chrono::duration<double> elapsed1 = finish1 - start1;
 
@@ -163,7 +163,7 @@ int main(){
             cout << endl << endl;
 
             auto start1 = chrono::high_resolution_clock::now();
-            bTree->rangeSearchTable(inp1, inp2);
+            bTree->rangeSearch(inp1, inp2);
             auto finish1 = chrono::high_resolution_clock::now();
             chrono::duration<double> elapsed1 = finish1 - start1;
 

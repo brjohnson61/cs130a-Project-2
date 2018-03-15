@@ -23,8 +23,7 @@ public:
     Node();
     Node(string word);
     Node(Node* copy);
-    ~Node();
-    bool operator=(Node& rhs);
+    void operator=(Node& rhs);
     bool operator==( Node& rhs);
     bool operator<( Node& rhs);
     bool operator>( Node& rhs); 

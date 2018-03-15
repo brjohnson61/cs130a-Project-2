@@ -10,7 +10,7 @@
 #include <string>
 #include <iostream>
 #include <algorithm>
-#include<fstream>
+#include <fstream>
 
 
 using namespace std;
@@ -58,6 +58,11 @@ bool Node::operator<(Node& rhs){
     }
 }
 
+void Node::operator=(Node& rhs){
+    this->count = rhs.getCount();
+    this->word = rhs.getWord();
+}
+
 string Node::getWord(){
     return this->word;
 }
@@ -89,3 +94,4 @@ void outputToFile(string word, string pathName){
     outputFile << word << endl;
     outputFile.close();
 }
+

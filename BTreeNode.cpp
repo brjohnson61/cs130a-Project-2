@@ -7,7 +7,7 @@
 
 BTreeNode::BTreeNode(){
     this-> keys = new Node[4];
-    this-> childern = new *BTreeNode[5];
+    this-> children = new BTreeNode*[5];
     this-> isLeaf = false;
     this-> numKeys = 0;
 }
@@ -17,11 +17,11 @@ void BTreeNode::incrementNumKeys(){
 }
 
 int BTreeNode::searchNode(Node node){
-    for(int i= 0;i< this->numKeys:i++){
+    for(int i= 0;i< this->numKeys;i++){
         if (this->keys[i] == node){
             return i;
         }
-        if (this->key[i] > node){
+        if (this->keys[i] > node){
             return  -10 - i;
         }
     }

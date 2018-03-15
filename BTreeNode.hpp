@@ -12,7 +12,7 @@ class BTreeNode {
     public:
         BTreeNode();
         int searchNode(Node node);
-        bool insertNode(Node node)
+        bool insertNode(Node node);
         void incrementNumKeys();
         ~BTreeNode();
 
@@ -22,7 +22,7 @@ class BTreeNode {
         bool isLeaf;
         int numKeys;
 
-friend class BTree4; 
+friend class BTree5; 
 };
 
 #endif /* BTreeNode_hpp */
