@@ -98,7 +98,7 @@ void AVL::setRoot(Node* root){
 }
 
 int AVL::getHeight(){
-    if(this->root == NULL){
+    if(this == NULL){
         return -1;
     }
     return this->height;
@@ -120,13 +120,29 @@ AVL* AVL::rotateRight(){
     AVL* childSwitch = NULL;
     if(this->left->getRight() != NULL){
         childSwitch = this->left->getRight();
+        cout << "assigned child root in rotation" << endl;
     }
 
     this->left = childSwitch;
     this->setBalanceAndHeight();
+    cout << "assigned child to old root" << endl;
     
     nextRoot->setRight(this);
     nextRoot->setBalanceAndHeight();
+
+    cout << "New root: " << nextRoot->getRoot()->getWord() << endl;
+    if(nextRoot->getLeft() == NULL){
+        cout << "New left: NULL" << endl;
+    }
+    else{
+        cout << "New left: " << nextRoot->getLeft()->getRoot()->getWord() << endl;
+    }
+    if(nextRoot->getRight() == NULL){
+        cout << "New right: NULL" << endl;
+    }
+    else{
+        cout << "New right: " << nextRoot->getRight()->getRoot()->getWord() << endl;
+    }
 
     return nextRoot;
 }
@@ -141,13 +157,29 @@ AVL* AVL::rotateLeft(){
 
     if(this->right->getLeft() != NULL){
         childSwitch = this->right->getLeft();
+        cout << "assigned child root in rotation" << endl;
     }
 
     this->right = childSwitch;
     this->setBalanceAndHeight();
+    cout << "assigned child to old root" << endl;
 
-    nextRoot->setRight(this);
+    nextRoot->setLeft(this);
     nextRoot->setBalanceAndHeight();
+
+    cout << "New root: " << nextRoot->getRoot()->getWord() << endl;
+    if(nextRoot->getLeft() == NULL){
+        cout << "New left: NULL" << endl;
+    }
+    else{
+        cout << "New left: " << nextRoot->getLeft()->getRoot()->getWord() << endl;
+    }
+    if(nextRoot->getRight() == NULL){
+        cout << "New right: NULL" << endl;
+    }
+    else{
+        cout << "New right: " << nextRoot->getRight()->getRoot()->getWord() << endl;
+    }
 
     return nextRoot;
 }
@@ -199,12 +231,11 @@ AVL* AVL::insertNode(string word){
     if(this->root == NULL){
         cout << "This->root is NULL" << endl;
         this->root = new Node(word);
-        return this;
     }
     else{
         cout << "Root not NULL, trying to place word" << endl;
         if(this->root->getWord() < word){
-            cout << "Placing word in right tree." << endl;
+           cout << "Placing word in right tree." << endl;
             if(this->right == NULL){
                 this->right = new AVL();
                 cout << "adding new empty right tree" << endl;
@@ -223,49 +254,49 @@ AVL* AVL::insertNode(string word){
                 this->left = new AVL();
                 cout << "added new empty left tree" << endl;
             }
-            this->left->insertNode(word);
+            this->left = this->left->insertNode(word);
             cout << "called insert on left tree and set equal to left tree" << endl;
         }
     }
 
 
-    // cout << "Right height: " << this->right->getHeight() << endl;
-    // cout << "Left height: " << this->left->getHeight() << endl;
-    // if(this->right->getHeight() > this->left->getHeight()){
-    //     this->height = this->right->getHeight() + 1;
-    // }
-    // else{
-    //     this->height = this->left->getHeight() + 1;
-    // }
+    cout << "Right height: " << this->right->getHeight() << endl;
+    cout << "Left height: " << this->left->getHeight() << endl;
+    if(this->right->getHeight() > this->left->getHeight()){
+        this->height = this->right->getHeight() + 1;
+    }
+    else{
+        this->height = this->left->getHeight() + 1;
+    }
 
-    // cout << "Height: " << this->height << endl;
+    cout << "Height: " << this->height << endl;
 
-    // this->balance = this->right->getHeight() - this->left->getHeight();
+    this->balance = this->right->getHeight() - this->left->getHeight();
 
-    // cout << "Balance: " << this->balance << endl;
+    cout << "Balance: " << this->balance << endl;
 
-    // if(this->balance < -1){
-    //     cout << "Left ";
-    //     if(this->left->getRoot()->getWord() < word){
-    //         cout << "Right" << endl;
-    //         this->left = this->left->rotateLeft();
-    //     }
-    //     else{
-    //         cout << "Left" << endl;
-    //     }
-    //     return this->rotateRight();
-    // }
-    // else if(this->balance > 1){
-    //      cout << "Right ";
-    //     if(this->right->getRoot()->getWord() > word){
-    //         cout << "Left" << endl;
-    //         this->right = this->right->rotateRight();//right rotate when right left
-    //     }
-    //     else{
-    //         cout << "Right" << endl;
-    //     }
-    //     return this->rotateLeft();
-    // }
+    if(this->balance < -1){
+        cout << "Left ";
+        if(this->left->getRoot()->getWord() < word){
+            cout << "Right" << endl;
+            this->left = this->left->rotateLeft();
+        }
+        else{
+            cout << "Left" << endl;
+        }
+        return this->rotateRight();
+    }
+    else if(this->balance > 1){
+         cout << "Right ";
+        if(this->right->getRoot()->getWord() > word){
+            cout << "Left" << endl;
+            this->right = this->right->rotateRight();//right rotate when right left
+        }
+        else{
+            cout << "Right" << endl;
+        }
+        return this->rotateLeft();
+    }
     return this;
 }
 
