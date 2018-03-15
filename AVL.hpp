@@ -23,12 +23,14 @@ public:
     void setRoot(Node* root);
     int getHeight();
     int getBalance();
-    void balanceTree();
+    AVL* rotateRight();
+    AVL* rotateLeft();
+    void setBalanceAndHeight();
     
 
     //Assignment functions
     bool searchTree(string word);
-    void insertNode(string word);
+    AVL* insertNode(string word);
     AVL* deleteNode(string word);
     void sortTree();
     void rangeSearchTree(string upperBound, string lowerBound);

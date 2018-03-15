@@ -43,14 +43,8 @@ int main(){
         while(inFile >> load){
             cleanParse(load);
             if(load != ""){
-    
-                if ((btree < 6) && (i == 0)){
-                
-                bTree->insertWord(load, bTree->getRoot());
                 //tree->insertNode(load);
-                cout << "Word: " << load << endl;
-                btree++;
-                }
+                //bTree->insertWord(load, bTree->getRoot());
                 wordCount++;
             }
         }
@@ -116,7 +110,7 @@ int main(){
                 chrono::duration<double> elapsed0 = finish0 - start0;
 
                 auto start1 = chrono::high_resolution_clock::now();
-                bTree->insertWord(inp1, bTree->getRoot());
+                //bTree->insertWord(inp1, bTree->getRoot());
                 auto finish1 = chrono::high_resolution_clock::now();
                 chrono::duration<double> elapsed1 = finish1 - start1;
 
