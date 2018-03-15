@@ -20,8 +20,10 @@ using namespace std;
 void find_and_replace(string& source, string const& find, string const& replace);
 void readFilesToVec(vector<string>& fileNames, string path);
 void cleanParse(string& s);
+void BTreeTesting();
 
 int main(){
+    BTreeTesting();
 
     AVL* tree = new AVL();
     BTree5* bTree = new BTree5();
@@ -210,4 +212,9 @@ void find_and_replace(string& source, string const& find, string const& replace)
         source.replace(i, find.length(), replace);
         i += replace.length();
     }
+}
+
+
+void BTreeTesting(){
+
 }
