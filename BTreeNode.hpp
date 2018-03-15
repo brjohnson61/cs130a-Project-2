@@ -3,8 +3,9 @@
 
 #include <stdio.h>
 #include <string>
-#include<stdio.h>
-#include"Node.hpp"
+#include <stdio.h>
+#include "Node.hpp"
+#include <vector>
 
 using namespace std;
 
@@ -12,9 +13,9 @@ class BTreeNode {
     public:
         BTreeNode();
         int searchNode(Node node);
-        bool insertNode(Node node);
+        int insertNode(Node node);
         void incrementNumKeys();
-        ~BTreeNode();
+        bool isFull();
 
     private:
         Node* keys;

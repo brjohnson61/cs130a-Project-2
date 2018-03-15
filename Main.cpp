@@ -39,18 +39,27 @@ int main(){
     for(int i=0; i< fileList.size(); i++){
         ifstream inFile(fileList[i].c_str());
         string load = "";
+        int btree= 0;
         while(inFile >> load){
             cleanParse(load);
             if(load != ""){
-                tree->insertNode(load);
+    
+                if ((btree < 6) && (i == 0)){
+                
                 bTree->insertWord(load, bTree->getRoot());
+                //tree->insertNode(load);
+                cout << "Word: " << load << endl;
+                btree++;
+                }
                 wordCount++;
             }
         }
         inFile.close();
     }
-
- 
+    
+    
+    bTree->sortWords(bTree->getRoot());
+    
 
     // for (int i = 0; i<fileList.size();i++){
     //     ifstream inFile(fileList[i].c_str());

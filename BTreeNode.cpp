@@ -3,11 +3,15 @@
 #include <string>
 #include<stdio.h>
 #include"Node.hpp"
+#include <vector>
 
 
 BTreeNode::BTreeNode(){
-    this-> keys = new Node[4];
-    this-> children = new BTreeNode*[5];
+    keys = new Node[4];
+    children = new BTreeNode*[5];
+    for (int i = 0; i< 5; i++){
+        this->children[i] = nullptr;
+    }
     this-> isLeaf = false;
     this-> numKeys = 0;
 }
@@ -28,41 +32,45 @@ int BTreeNode::searchNode(Node node){
     return -10 - this-> numKeys;
 }
 
-bool BTreeNode::insertNode(Node node){
+int BTreeNode::insertNode(Node node){
      if (this->numKeys == 4){
-        return false;
+        return -1;
     }
 
     if (this->numKeys == 0){
+
         this->keys[0] = node;
         this->incrementNumKeys();
-        return true;
+        return 0;
     }
 
     int search = searchNode(node);
     if (search >= 0){
         this->keys[search].increaseCount();
-        return true;
+        return -2;
     }
    
     search = search*-1 - 10;
     if (search == numKeys){
         this->keys[search] = node;
         this->incrementNumKeys();
-        return true;
+        return search;
     }else{
         for (int i = numKeys; i > search; i--){
             this->keys[i] = this->keys[i-1];
         }
         this->keys[search] = node;
         this->incrementNumKeys();
-        return true;
+        return search;
     }
     
 }
 
-BTreeNode::~BTreeNode(){
-    delete [] keys;
-    delete [] children;
-
+bool BTreeNode::isFull(){
+    if (this->numKeys == 4)
+        return true;
+    return false;
+    
 }
+
+
