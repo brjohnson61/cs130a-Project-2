@@ -22,13 +22,10 @@ void BTree5::insertWord(string word, BTreeNode* root){
         
         this-> root = new BTreeNode();
         this-> root->isLeaf = true;
-        
         this-> root->insertNode(temp);
     }else{
     
         if (root->isLeaf != true ){
-            
-           
             for (int i = 0; i < root->numKeys;i++){
                 if(root->keys[i] > temp){
                     insertWord(word,root->children[i]);
@@ -85,7 +82,7 @@ void BTree5::balanceNode(BTreeNode* root){
     if ((this->root == root) && (root != nullptr)){
         if (root->numKeys == 4){
             
-            int index = rand() % 2 + 1;
+            int index = /*rand() % 2 +*/ 1;
             BTreeNode* temp0 = new BTreeNode();
             BTreeNode* temp1 = new BTreeNode();
             if (root->isLeaf){
@@ -141,6 +138,7 @@ void BTree5::balanceNode(BTreeNode* root){
 
                     BTreeNode* temp = new BTreeNode();
                     temp->insertNode(root->children[i]->keys[0]);
+
                     if( root->children[0]->isLeaf){
                         temp->isLeaf = true;
                     }
@@ -148,20 +146,17 @@ void BTree5::balanceNode(BTreeNode* root){
                         root->children[k] = root->children[k-1];
                     }
                     if (index == 1){
-                        
-                        root->children[i]->numKeys = 2;
-                        root->children[i]->keys[0] = root->children[i]->keys[2]; 
-                        root->children[i]->keys[1] = root->children[i]->keys[3];
                         root->children[i] = temp;
-                        temp = nullptr;
-                        delete temp;
+                        root->children[i]->numKeys = 1;
+                        root->children[i+1]->numKeys = 2;
+                        root->children[i+1]->keys[0] = root->children[i+1]->keys[2]; 
+                        root->children[i+1]->keys[1] = root->children[i+1]->keys[3];
                         
                         //need to get the case when children is not leaf
-
                         if (root->children[i]->isLeaf == false){
                             cout << "Children i : " << i << " is not leaf" << endl;
                             root->children[i]->children[0] = root->children[i+1]->children[0];
-                            root->children[i]->children[1] = root->children[i+1]->children[1];
+                            root->children[i]->children[1]= root->children[i+1]->children[1];
                             root->children[i+1]->children[0] = root->children[i+1]->children[2];
                             root->children[i+1]->children[1] = root->children[i+1]->children[3];
                             root->children[i+1]->children[2] = root->children[i+1]->children[4];
@@ -171,7 +166,8 @@ void BTree5::balanceNode(BTreeNode* root){
                         //need to do when index == 2
 
                     }
-                    
+                    temp = nullptr;
+                    delete temp;
                     
 
 
@@ -185,10 +181,13 @@ void BTree5::balanceNode(BTreeNode* root){
 
 void BTree5::getHeight(BTreeNode* root, int depth){
     if (root != nullptr){
-        cout << "Number Of Keys: " << root->numKeys << " Depth" << depth << endl;
-        for(int i = 0; i < root->numKeys+ 1; i ++){
+        cout << "Number Of Keys: " << root->numKeys << " Depth " << depth << endl;
+        for(int i = 0; i < root->numKeys ; i ++){
+             cout << "Keys["<<i<<"] : "<< root->keys[i].getWord() << " Depth: "<< depth<< endl;
             getHeight(root->children[i], depth+1) ;
+           
         }
+        getHeight(root->children[root->numKeys], depth+1);
     }
 }
 

@@ -220,6 +220,7 @@ void find_and_replace(string& source, string const& find, string const& replace)
 
 void BTreeTesting(){
     BTree5* tree = new BTree5();
+
     tree->insertWord("animal",tree->getRoot());
     tree->insertWord("welch",tree->getRoot());
     tree->insertWord("hungry",tree->getRoot());
@@ -231,20 +232,20 @@ void BTreeTesting(){
     tree->insertWord("translate", tree->getRoot());
     tree->insertWord("tradition", tree->getRoot());
     tree->insertWord("terrain", tree->getRoot());
-    tree->insertWord("trash", tree->getRoot());
-    tree->insertWord("winner", tree->getRoot());
-    tree->insertWord("won", tree->getRoot());
-    tree->insertWord("wonderful", tree->getRoot());
-    tree->insertWord("zit", tree->getRoot());
-    tree->insertWord("zzz", tree->getRoot());
-    tree->insertWord("vault", tree->getRoot());
-    tree->insertWord("trunk", tree->getRoot());
-    tree->insertWord("quart", tree->getRoot());
-    tree->insertWord("van", tree->getRoot());
-    tree->insertWord("vast", tree->getRoot());
-    tree->insertWord("xanax", tree->getRoot());
-    tree->insertWord("zorro", tree->getRoot());
-    tree->insertWord("zombie", tree->getRoot());
+    // tree->insertWord("trash", tree->getRoot());
+    // tree->insertWord("winner", tree->getRoot());
+    // tree->insertWord("won", tree->getRoot());
+    // tree->insertWord("wonderful", tree->getRoot());
+    // tree->insertWord("zit", tree->getRoot());
+    // tree->insertWord("zzz", tree->getRoot());
+    // tree->insertWord("vault", tree->getRoot());
+    // tree->insertWord("trunk", tree->getRoot());
+    // tree->insertWord("quart", tree->getRoot());
+    // tree->insertWord("van", tree->getRoot());
+    // tree->insertWord("vast", tree->getRoot());
+    // tree->insertWord("xanax", tree->getRoot());
+    // tree->insertWord("zorro", tree->getRoot());
+    // tree->insertWord("zombie", tree->getRoot());
     
    
     
