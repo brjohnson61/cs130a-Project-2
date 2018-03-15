@@ -24,6 +24,8 @@ public:
     int getHeight();
     int getBalance();
     void balanceTree();
+    void rotateRight();
+    void rotateLeft();
     
 
     //Assignment functions

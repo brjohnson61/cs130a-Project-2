@@ -146,6 +146,58 @@ int AVL::getBalance(){
     return this->balance;
 }
 
+AVL* AVL::rotateRight(){
+    if(this->left == NULL){
+        return this;
+    }
+
+    AVL* nextRoot = this->left;
+    AVL* childSwitch = NULL;
+    if(this->left->getRight() != NULL){
+        childSwitch = this->left->getRight();
+    }
+
+    this->left = childSwitch;
+    this->setBalanceAndHeight();
+    
+    nextRoot->setRight(this);
+    nextRoot->setBalanceAndHeight();
+
+    return nextRoot;
+}
+
+AVL* AVL::rotateLeft(){
+    if(this->right == NULL){
+        return this;
+    }
+
+    AVL* nextRoot = this->right;
+    AVL* childSwitch = NULL;
+
+    if(this->right->getLeft() != NULL){
+        childSwitch = this->right->getLeft();
+    }
+
+    this->right = childSwitch;
+    this->setBalanceAndHeight();
+
+    nextRoot->setRight(this);
+    nextRoot->setBalanceAndHeight();
+
+    return nextRoot;
+}
+
+void AVL::setBalanceAndHeight(){
+    if(this->right->getHeight() > this->left->getHeight()){
+        this->height = this->right->getHeight() + 1;
+    }
+    else{
+        this->height = this->left->getHeight() + 1;
+    }
+
+    this->balance = this->right->getHeight() - this->left->getHeight();
+}
+
 bool AVL::searchTree(string word){
     if(this->root == NULL){
         return false;
@@ -174,25 +226,27 @@ bool AVL::searchTree(string word){
     
 }
 
-void AVL::insertNode(string word){
+AVL* AVL::insertNode(string word){
     if(this->root == NULL){
         this->root = new Node(word);
+        return this;
     }
     else{
         if(this->root->getWord() > word){
             if(this->right == NULL){
                 this->right = new AVL();
             }
-            this->right->insertNode(word);
+            this->right = this->right->insertNode(word);
         }
         if(this->root->getWord() == word){
             this->root->increaseCount();
+            return this;
         }
         else{
             if(this->left == NULL){
                 this->left = new AVL();
             }
-            this->left->insertNode(word);
+            this->left = this->left->insertNode(word);
         }
     }
 
@@ -206,10 +260,16 @@ void AVL::insertNode(string word){
     this->balance = this->right->getHeight() - this->left->getHeight();
 
     if(this->balance < -1){
-
+        if(this->left->getRoot()->getWord() < word){
+            this->left = this->left->rotateLeft();
+        }
+        return this->rotateRight();
     }
-    else{
-
+    else if(this->balance > 1){
+        if(this->right->getRoot()->getWord() > word){
+            this->right = this->right->rotateRight();//right rotate when right left
+        }
+        return this->rotateLeft();
     }
 
 }
