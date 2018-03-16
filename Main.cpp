@@ -225,31 +225,58 @@ void BTreeTesting(){
     tree->insertWord("welch",tree->getRoot());
     tree->insertWord("hungry",tree->getRoot());
     tree->insertWord("happy",tree->getRoot());
-
-    
     tree->insertWord("hello", tree->getRoot());
     tree->insertWord("name", tree->getRoot());
     tree->insertWord("translate", tree->getRoot());
     tree->insertWord("tradition", tree->getRoot());
     tree->insertWord("terrain", tree->getRoot());
-    // tree->insertWord("trash", tree->getRoot());
-    // tree->insertWord("winner", tree->getRoot());
-    // tree->insertWord("won", tree->getRoot());
-    // tree->insertWord("wonderful", tree->getRoot());
-    // tree->insertWord("zit", tree->getRoot());
-    // tree->insertWord("zzz", tree->getRoot());
-    // tree->insertWord("vault", tree->getRoot());
-    // tree->insertWord("trunk", tree->getRoot());
-    // tree->insertWord("quart", tree->getRoot());
-    // tree->insertWord("van", tree->getRoot());
-    // tree->insertWord("vast", tree->getRoot());
-    // tree->insertWord("xanax", tree->getRoot());
-    // tree->insertWord("zorro", tree->getRoot());
-    // tree->insertWord("zombie", tree->getRoot());
-    
-   
-    
-    
-    tree->sortWords(tree->getRoot());
+    tree->insertWord("trash", tree->getRoot());
+    tree->insertWord("winner", tree->getRoot());
+    tree->insertWord("won", tree->getRoot());
+    tree->insertWord("wonderful", tree->getRoot());
+    tree->insertWord("zit", tree->getRoot());
+    tree->insertWord("zzz", tree->getRoot());
+    tree->insertWord("vault", tree->getRoot());
+    tree->insertWord("trunk", tree->getRoot());
+    tree->insertWord("quart", tree->getRoot());
+    tree->insertWord("van", tree->getRoot());
+    tree->insertWord("vast", tree->getRoot());
+    tree->insertWord("xanax", tree->getRoot());
+    tree->insertWord("zorro", tree->getRoot());
+    tree->insertWord("zombie", tree->getRoot());
+    tree->insertWord("xaxaphone", tree->getRoot());
+    tree->insertWord("zone", tree->getRoot());
+    tree->insertWord("zam", tree->getRoot());
+    tree->insertWord("basement", tree->getRoot());
+    tree->insertWord("montreal", tree->getRoot());
+    tree->insertWord("numbers", tree->getRoot());
+    tree->insertWord("sort", tree->getRoot());
+    tree->insertWord("text", tree->getRoot());
+    tree->insertWord("sext", tree->getRoot());
+    tree->insertWord("you", tree->getRoot());
+    tree->insertWord("yoursel", tree->getRoot());
+    tree->insertWord("yam", tree->getRoot());
+    tree->insertWord("yesterday", tree->getRoot());
+    tree->insertWord("yard", tree->getRoot());
+    tree->insertWord("yeeeeee", tree->getRoot());
+    tree->insertWord("yesterday", tree->getRoot());
+    tree->insertWord("yard", tree->getRoot());
+    tree->insertWord("yeeeeee", tree->getRoot());
+    tree->insertWord("wow", tree->getRoot());
+    tree->insertWord("what", tree->getRoot());
+    tree->insertWord("wart", tree->getRoot());
+    tree->insertWord("wash", tree->getRoot());
+    tree->insertWord("winier", tree->getRoot());
+    tree->insertWord("wet", tree->getRoot());
+    tree->insertWord("pussy", tree->getRoot());
+    tree->insertWord("waterdrop", tree->getRoot());
+    tree->insertWord("eskit", tree->getRoot());
+    tree->insertWord("bones", tree->getRoot());
+
+
+    tree->sortWords(tree->getRoot()); 
     tree->getHeight(tree->getRoot(), 0);
+    
+    
+    
 }
