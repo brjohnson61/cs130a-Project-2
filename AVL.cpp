@@ -195,6 +195,15 @@ void AVL::setBalanceAndHeight(){
     this->balance = this->right->getHeight() - this->left->getHeight();
 }
 
+AVL* AVL::minimumRoot(){
+    if(this->left == NULL){
+        return this;
+    }
+    else{
+        return this->left->minimumRoot();
+    }
+}
+
 bool AVL::searchTree(string word){
     if(this->root == NULL){
         return false;
@@ -233,7 +242,7 @@ AVL* AVL::insertNode(string word){
         this->root = new Node(word);
     }
     else{
-        cout << "Root not NULL, trying to place word" << endl;
+        cout << "Root is: " << this->root->getWord() << ", trying to place word" << endl;
         if(this->root->getWord() < word){
            cout << "Placing word in right tree." << endl;
             if(this->right == NULL){
@@ -287,7 +296,7 @@ AVL* AVL::insertNode(string word){
         return this->rotateRight();
     }
     else if(this->balance > 1){
-         cout << "Right ";
+        cout << "Right ";
         if(this->right->getRoot()->getWord() > word){
             cout << "Left" << endl;
             this->right = this->right->rotateRight();//right rotate when right left
@@ -301,6 +310,102 @@ AVL* AVL::insertNode(string word){
 }
 
 AVL* AVL::deleteNode(string word){
+    if(this->root == NULL){
+        cout << "Did not find:  " << word <<" -NULL root" << endl;
+        return this;
+    }
+    
+    if(this->root->getWord() == word){
+        if(this->root->getCount() > 1){
+            this->root->decreaseCount();
+            cout << "word found: decrementCount" << endl;
+            return this;
+        }
+        else if(this->right==NULL && this->left==NULL){
+                cout << "word found:  " << word << "  - Both roots NULL" << endl;
+                delete this;
+                return NULL;
+        }
+        else if((this->getRight() == NULL) != (this->left == NULL)){
+            AVL* temp;
+            cout << "word found:  " << word;
+            if(this->right==NULL){
+                cout << "  right root is NULL" << endl;
+                temp = this->left;
+                this->left = NULL;
+            }
+            else{
+                cout << "  left root is NULL" << endl;
+                temp = this->right;
+                this->right = NULL;
+            }
+            delete this;
+            return temp;
+        }
+        else{
+            AVL* temp = this->right->minimumRoot();
+            
+            this->root->setWord(temp->getRoot()->getWord());
+            this->root->setCount(temp->getRoot()->getCount());
+
+            this->right = this->right->deleteNode(this->root->getWord());
+        }
+    }
+    else if(this->root->getWord() < word){
+        if(this->right == NULL){
+            return this;
+        }
+        else{
+            this->right = this->right->deleteNode(word);
+        }
+    }
+    else{
+        if(this->left == NULL){
+            return this;
+        }
+        else{
+            this->left = this->left->deleteNode(word);
+        }
+    }
+
+    // cout << "Right height: " << this->right->getHeight() << endl;
+    // cout << "Left height: " << this->left->getHeight() << endl;
+    if(this->right->getHeight() > this->left->getHeight()){
+        this->height = this->right->getHeight() + 1;
+    }
+    else{
+        this->height = this->left->getHeight() + 1;
+    }
+
+    cout << "Height: " << this->height << endl;
+
+    this->balance = this->right->getHeight() - this->left->getHeight();
+
+    cout << "Balance: " << this->balance << endl;
+
+    if(this->balance < -1){
+        // cout << "Left ";
+        if(this->left->getRoot()->getWord() < word){
+            // cout << "Right" << endl;
+            this->left = this->left->rotateLeft();
+        }
+        else{
+            // cout << "Left" << endl;
+        }
+        return this->rotateRight();
+    }
+    else if(this->balance > 1){
+        // cout << "Right ";
+        if(this->right->getRoot()->getWord() > word){
+            // cout << "Left" << endl;
+            this->right = this->right->rotateRight();//right rotate when right left
+        }
+        else{
+            // cout << "Right" << endl;
+        }
+        return this->rotateLeft();
+    }
+
     return this;
 }
 

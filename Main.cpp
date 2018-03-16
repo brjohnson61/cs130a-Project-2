@@ -105,7 +105,7 @@ int main(){
                 cin >> inp1;
 
                 auto start0 = chrono::high_resolution_clock::now();
-                tree->insertNode(inp1);
+                tree = tree->insertNode(inp1);
                 auto finish0 = chrono::high_resolution_clock::now();
                 chrono::duration<double> elapsed0 = finish0 - start0;
 
@@ -122,7 +122,7 @@ int main(){
             cin >> inp1;
                 
             auto start0 = chrono::high_resolution_clock::now();
-            tree->deleteNode(inp1);
+            tree = tree->deleteNode(inp1);
             auto finish0 = chrono::high_resolution_clock::now();
             chrono::duration<double> elapsed0 = finish0 - start0;
 
