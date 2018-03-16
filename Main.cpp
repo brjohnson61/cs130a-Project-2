@@ -292,9 +292,11 @@ void BTreeTesting(){
 
 
     tree->sortWords(tree->getRoot()); 
-    tree->deleteWord("name", tree->getRoot());
-    tree->deleteWord("happy", tree->getRoot());
-    cout << "After deleting" << endl << endl;
+    // tree->deleteWord("name", tree->getRoot());
+    tree->deleteWord("animal", tree->getRoot());
+    tree->deleteWord("hungry", tree->getRoot());
+    // cout << "After deleting" << endl << endl;
+
     tree->sortWords(tree->getRoot()); 
 
 

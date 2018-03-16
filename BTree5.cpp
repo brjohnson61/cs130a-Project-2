@@ -60,9 +60,12 @@ void BTree5::deleteWord(string word, BTreeNode* root){
     Node temp = Node(word);
     for (int i = 0; i < root->numKeys; i++){
         if (temp < root->keys[i]){
+            cout << "This executes" << endl;
             if (root->children[i]->isLeaf == true){
+                cout << "Children of i: " << i << " is leaf: " << root->children[i]->isLeaf <<endl;
                 int search = root->children[i]->searchNode(temp);
                 if (search >= 0){
+                    cout << "Search was sucessfull: "<< search << endl;
                     balanceLeafWithParent(i, root);
                 }
             }
@@ -302,8 +305,9 @@ void BTree5::balanceInsertNode(BTreeNode* root){
 }
 
 void BTree5::borrowFromRight(int keyIndex, BTreeNode* parent){
+    cout << "Borrow from right getting called" << endl;
     if (parent->children[keyIndex]->isLeaf == true){
-        parent->children[keyIndex]->insertNode(parent->keys[keyIndex])
+        parent->children[keyIndex]->insertNode(parent->keys[keyIndex]);
         parent->deleteNode(parent->keys[keyIndex]);
         parent->insertNode(parent->children[keyIndex+1]->keys[0]);
         parent->children[keyIndex+1]->deleteNode(parent->keys[keyIndex]);
@@ -313,9 +317,9 @@ void BTree5::borrowFromRight(int keyIndex, BTreeNode* parent){
 void BTree5::borrowFromLeft(int keyIndex, BTreeNode* parent){
     if (parent->children[keyIndex]->isLeaf == true){
         parent->children[keyIndex+1]->insertNode(parent->keys[keyIndex]);
-        parent->deleteNode(parent->parent->keys[keyIndex]);
-        parent->insert(parent->children[i]->numKeys-1);
-        parent->children[keyIndex]->deleteWord(parent->keys[keyIndex]);
+        parent->deleteNode(parent->keys[keyIndex]);
+        parent->insertNode(parent->children[keyIndex]->keys[parent->children[keyIndex]->numKeys-1]);
+        parent->children[keyIndex]->deleteNode(parent->keys[keyIndex]);
     }
 }
 
@@ -325,21 +329,22 @@ void BTree5::mergeChildrenFromKey(int keyIndex, BTreeNode* parent){
 void BTree5::balanceLeafWithParent(int child, BTreeNode* parent){
    if (parent->children[child]->numKeys < 2){
        if (child == 0){
-           if (parent->children[1]->numKeys > 2){
+           cout << "Child == 0" << endl;
+           if (parent->children[1]->numKeys > 1){
                borrowFromRight(0, parent);
            }else {
                mergeChildrenFromKey(0, parent);
            }
        }else if (child == parent->numKeys){
-           if (parent->children[child-1]->numKeys > 2){
+           if (parent->children[child-1]->numKeys > 1){
                borrowFromLeft(child-1, parent);
            }else {
                mergeChildrenFromKey(child-1, parent);
            }
        }else{
-           if (parent->children[child+1]->numKeys > 2){
+           if (parent->children[child+1]->numKeys > 1){
                borrowFromRight(child, parent);
-           }else if(parent->children[child-1]->numKeys > 2){
+           }else if(parent->children[child-1]->numKeys > 1){
                borrowFromLeft(child-1, parent);
            }else {
                mergeChildrenFromKey(child-1, parent);
