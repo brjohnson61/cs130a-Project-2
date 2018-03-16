@@ -43,9 +43,9 @@ int main(){
         while(inFile >> load){
             cleanParse(load);
             if(load != ""){
-                //tree->insertNode(load);
+                //tree = tree->insertNode(load);
                 //bTree->insertWord(load, bTree->getRoot());
-                wordCount++;
+                //wordCount++;
             }
         }
         inFile.close();
@@ -54,18 +54,34 @@ int main(){
     
     bTree->sortWords(bTree->getRoot());
     
+    cout << "Option 1: Test complexity and timing" << endl;
+    cout << "Option 2: Regular output" << endl;
 
-    // for (int i = 0; i<fileList.size();i++){
-    //     ifstream inFile(fileList[i].c_str());
-    //     string load = "";
-    //     while(inFile >> load){
-    //         cleanParse(load);
-    //         if (load != ""){
-    //             table->insertNode(load);
-    //         }
-    //     }
-    //     inFile.close();
-    // }
+    string navigation = "";
+    cin >> navigation;
+
+    if(navigation == "1"){
+        ifstream inFile("testWords.txt");
+        string load = "";
+        wordCount = 0;
+        auto startTimeTest = chrono::high_resolution_clock::now();
+        while(inFile >> load){
+            cleanParse(load);
+            if(load != ""){
+                if(wordCount == 1000){
+                    break;
+                }
+                tree = tree->insertNode(load);
+                //bTree->insertWord(load, bTree->getRoot());
+                wordCount++;
+            }
+        }
+        auto finishTimeTest = chrono::high_resolution_clock::now();
+        inFile.close();
+        chrono::duration<double> elapsedTimeTest = finishTimeTest - startTimeTest;
+        cout << "Timing Test: " << elapsedTimeTest.count() << " s" << endl;
+    }
+
 
     cout << "Begin Final Turnin Select Menu" << endl;
 
@@ -97,8 +113,8 @@ int main(){
                 (bbool || bt4bool) ? cout<< "true" : cout << "false";
                 cout << endl;
 
-                cout << "BST: " << elapsed0.count() << " s" << endl;
-                cout << "HashTable: " << elapsed1.count() << " s" << endl;  
+                cout << "AVL: " << elapsed0.count() << " s" << endl;
+                cout << "2-5: " << elapsed1.count() << " s" << endl;  
         }
         else if(func == "2"){
                 cout << "Enter word to insert: " << endl;
@@ -114,8 +130,8 @@ int main(){
                 auto finish1 = chrono::high_resolution_clock::now();
                 chrono::duration<double> elapsed1 = finish1 - start1;
 
-                cout << "BST: " << elapsed0.count() << endl;
-                cout << "Hash: " << elapsed1.count() << endl;
+                cout << "AVL: " << elapsed0.count() << endl;
+                cout << "2-5: " << elapsed1.count() << endl;
         }
         else if(func == "3"){
             cout << "Enter word to delete: " << endl;
@@ -131,8 +147,8 @@ int main(){
             auto finish1 = chrono::high_resolution_clock::now();
             chrono::duration<double> elapsed1 = finish1 - start1;
 
-            cout << "BST: " << elapsed0.count() << "s" << endl;
-            cout << "Hash: " << elapsed1.count() << "s" << endl;
+            cout << "AVL: " << elapsed0.count() << "s" << endl;
+            cout << "2-5: " << elapsed1.count() << "s" << endl;
             }
             else if(func == "4"){
             outputToFile("reported", "output.txt");
@@ -150,8 +166,8 @@ int main(){
             auto finish1 = chrono::high_resolution_clock::now();
             chrono::duration<double> elapsed1 = finish1 - start1;
 
-            cout << "BST: " << elapsed0.count() << "s" << endl;
-            cout << "Hash: " << elapsed1.count() << "s" << endl;
+            cout << "AVL: " << elapsed0.count() << "s" << endl;
+            cout << "2-5: " << elapsed1.count() << "s" << endl;
         }
         else if(func == "5"){
             cout << "Enter two words for ranged search." << endl;
@@ -172,8 +188,8 @@ int main(){
             auto finish1 = chrono::high_resolution_clock::now();
             chrono::duration<double> elapsed1 = finish1 - start1;
 
-            cout << "BST: " << elapsed0.count() << endl;
-            cout << "Hash: " << elapsed1.count() << endl;
+            cout << "AVL: " << elapsed0.count() << endl;
+            cout << "2-5: " << elapsed1.count() << endl;
         }
     }
     return 0;
