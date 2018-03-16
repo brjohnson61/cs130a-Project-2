@@ -16,6 +16,8 @@ class BTreeNode {
         int insertNode(Node node);
         void incrementNumKeys();
         bool isFull();
+        int deleteNode(Node node);
+
 
     private:
         Node* keys;

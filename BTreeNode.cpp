@@ -66,6 +66,24 @@ int BTreeNode::insertNode(Node node){
     
 }
 
+int BTreeNode::deleteNode(Node node){
+    int search = searchNode(node);
+    if (search < 0){
+        return -1;
+    }else{
+        if (search == this->numKeys-1){
+            this->numKeys = this->numKeys-1;
+            return 1;
+        }else{
+            for (int i = search; i < this->numKeys; i++ ){
+                    this->keys[i] = this->keys[i+1];
+            }
+            this->numKeys = this->numKeys-1;
+            return 1;
+        }
+    }
+}
+
 bool BTreeNode::isFull(){
     if (this->numKeys == 4)
         return true;
