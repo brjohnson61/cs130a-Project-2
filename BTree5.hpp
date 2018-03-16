@@ -16,14 +16,15 @@ class BTree5 {
         BTreeNode* searchWord(string word);
         void sortWords(BTreeNode* root);
         void rangeSearch(string word1, string word2);
-        void balanceNode(BTreeNode* root);
         void getHeight(BTreeNode* root, int depth);
+        void balanceInsertNode(BTreeNode* root);
+        void balanceDeleteNode(BTreeNode* root);
         ~BTree5();
 
 
     private:
         BTreeNode * root;
-
+        
 
 };
 
