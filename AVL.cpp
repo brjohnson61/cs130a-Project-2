@@ -157,28 +157,28 @@ AVL* AVL::rotateLeft(){
 
     if(this->right->getLeft() != NULL){
         childSwitch = this->right->getLeft();
-        cout << "assigned child root in rotation" << endl;
+        // cout << "assigned child root in rotation" << endl;
     }
 
     this->right = childSwitch;
     this->setBalanceAndHeight();
-    cout << "assigned child to old root" << endl;
+    // cout << "assigned child to old root" << endl;
 
     nextRoot->setLeft(this);
     nextRoot->setBalanceAndHeight();
 
-    cout << "New root: " << nextRoot->getRoot()->getWord() << endl;
+    // cout << "New root: " << nextRoot->getRoot()->getWord() << endl;
     if(nextRoot->getLeft() == NULL){
-        cout << "New left: NULL" << endl;
+        // cout << "New left: NULL" << endl;
     }
     else{
-        cout << "New left: " << nextRoot->getLeft()->getRoot()->getWord() << endl;
+        // cout << "New left: " << nextRoot->getLeft()->getRoot()->getWord() << endl;
     }
     if(nextRoot->getRight() == NULL){
-        cout << "New right: NULL" << endl;
+        // cout << "New right: NULL" << endl;
     }
     else{
-        cout << "New right: " << nextRoot->getRight()->getRoot()->getWord() << endl;
+        // cout << "New right: " << nextRoot->getRight()->getRoot()->getWord() << endl;
     }
 
     return nextRoot;
@@ -202,6 +202,13 @@ AVL* AVL::minimumRoot(){
     else{
         return this->left->minimumRoot();
     }
+}
+
+void AVL::balanceTree(){
+
+
+
+
 }
 
 bool AVL::searchTree(string word){
@@ -233,44 +240,44 @@ bool AVL::searchTree(string word){
 }
 
 AVL* AVL::insertNode(string word){
-    cout << "inserting word: " << word << endl;
+    // cout << "inserting word: " << word << endl;
     if(this == NULL){
-        cout << "this is NULL" << endl;
+        // cout << "this is NULL" << endl;
     }
     if(this->root == NULL){
-        cout << "This->root is NULL" << endl;
+        // cout << "This->root is NULL" << endl;
         this->root = new Node(word);
     }
     else{
-        cout << "Root is: " << this->root->getWord() << ", trying to place word" << endl;
+        // cout << "Root is: " << this->root->getWord() << ", trying to place word" << endl;
         if(this->root->getWord() < word){
-           cout << "Placing word in right tree." << endl;
+        //    cout << "Placing word in right tree." << endl;
             if(this->right == NULL){
                 this->right = new AVL();
-                cout << "adding new empty right tree" << endl;
+                // cout << "adding new empty right tree" << endl;
             }
             this->right = this->right->insertNode(word);
-            cout << "calling insert on right tree and setting equal to right tree" << endl;
+            // cout << "calling insert on right tree and setting equal to right tree" << endl;
         }
         else if(this->root->getWord() == word){
             this->root->increaseCount();
-            cout << "incremented count" << endl;
+            // cout << "incremented count" << endl;
             return this;
         }
         else{
-            cout << "Placing word in left tree." << endl;
+            // cout << "Placing word in left tree." << endl;
             if(this->left == NULL){
                 this->left = new AVL();
-                cout << "added new empty left tree" << endl;
+                // cout << "added new empty left tree" << endl;
             }
             this->left = this->left->insertNode(word);
-            cout << "called insert on left tree and set equal to left tree" << endl;
+            // cout << "called insert on left tree and set equal to left tree" << endl;
         }
     }
 
 
-    cout << "Right height: " << this->right->getHeight() << endl;
-    cout << "Left height: " << this->left->getHeight() << endl;
+    // cout << "Right height: " << this->right->getHeight() << endl;
+    // cout << "Left height: " << this->left->getHeight() << endl;
     if(this->right->getHeight() > this->left->getHeight()){
         this->height = this->right->getHeight() + 1;
     }
@@ -278,31 +285,31 @@ AVL* AVL::insertNode(string word){
         this->height = this->left->getHeight() + 1;
     }
 
-    cout << "Height: " << this->height << endl;
+    // cout << "Height: " << this->height << endl;
 
     this->balance = this->right->getHeight() - this->left->getHeight();
 
-    cout << "Balance: " << this->balance << endl;
+    // cout << "Balance: " << this->balance << endl;
 
     if(this->balance < -1){
-        cout << "Left ";
+        // cout << "Left ";
         if(this->left->getRoot()->getWord() < word){
-            cout << "Right" << endl;
+            // cout << "Right" << endl;
             this->left = this->left->rotateLeft();
         }
         else{
-            cout << "Left" << endl;
+            // cout << "Left" << endl;
         }
         return this->rotateRight();
     }
     else if(this->balance > 1){
-        cout << "Right ";
+        // cout << "Right ";
         if(this->right->getRoot()->getWord() > word){
-            cout << "Left" << endl;
+            // cout << "Left" << endl;
             this->right = this->right->rotateRight();//right rotate when right left
         }
         else{
-            cout << "Right" << endl;
+            // cout << "Right" << endl;
         }
         return this->rotateLeft();
     }
@@ -311,36 +318,41 @@ AVL* AVL::insertNode(string word){
 
 AVL* AVL::deleteNode(string word){
     if(this->root == NULL){
-        cout << "Did not find:  " << word <<" -NULL root" << endl;
+        // cout << "Did not find:  " << word <<" -NULL root" << endl;
         return this;
     }
     
     if(this->root->getWord() == word){
         if(this->root->getCount() > 1){
             this->root->decreaseCount();
-            cout << "word found: decrementCount" << endl;
+            // cout << "word found: decrementCount" << endl;
             return this;
         }
-        else if(this->right==NULL && this->left==NULL){
-                cout << "word found:  " << word << "  - Both roots NULL" << endl;
-                delete this;
+        if(this->right==NULL && this->left==NULL){
+                // cout << "word found:  " << word << "  - Both roots NULL" << endl;
+                delete this->root;
                 return NULL;
         }
         else if((this->getRight() == NULL) != (this->left == NULL)){
             AVL* temp;
-            cout << "word found:  " << word;
+            // cout << "word found:  " << word;
             if(this->right==NULL){
-                cout << "  right root is NULL" << endl;
+                // cout << "  right root is NULL" << endl;
                 temp = this->left;
                 this->left = NULL;
             }
             else{
-                cout << "  left root is NULL" << endl;
+                // cout << "  left root is NULL" << endl;
                 temp = this->right;
                 this->right = NULL;
             }
-            delete this;
-            return temp;
+            this->root = temp->getRoot();
+            this->right = temp->getRight();
+            this->left = temp->getLeft();
+            delete temp->getRoot();
+            temp->setRight(NULL);
+            temp->setLeft(NULL);
+            delete temp;
         }
         else{
             AVL* temp = this->right->minimumRoot();
@@ -352,18 +364,24 @@ AVL* AVL::deleteNode(string word){
         }
     }
     else if(this->root->getWord() < word){
+        // cout << "Searching right tree for node" << endl;
         if(this->right == NULL){
+            // cout << "right tree is null, returning current object" << endl;
             return this;
         }
         else{
+            // cout << "right tree has nodes, delete " << word << " from right tree" << endl;
             this->right = this->right->deleteNode(word);
         }
     }
     else{
+        // cout << "Searching left tree for node" << endl;
         if(this->left == NULL){
+            // cout << "left tree is null, returning curent object" << endl;
             return this;
         }
         else{
+            // cout << "left tree has nodes, delete " << word << " from left tree" << endl;
             this->left = this->left->deleteNode(word);
         }
     }
@@ -377,11 +395,11 @@ AVL* AVL::deleteNode(string word){
         this->height = this->left->getHeight() + 1;
     }
 
-    cout << "Height: " << this->height << endl;
+    // cout << "Height: " << this->height << endl;
 
     this->balance = this->right->getHeight() - this->left->getHeight();
 
-    cout << "Balance: " << this->balance << endl;
+    // cout << "Balance: " << this->balance << endl;
 
     if(this->balance < -1){
         // cout << "Left ";

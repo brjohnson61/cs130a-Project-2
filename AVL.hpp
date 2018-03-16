@@ -26,6 +26,7 @@ public:
     AVL* rotateRight();
     AVL* rotateLeft();
     void setBalanceAndHeight();
+    void balanceTree();
     AVL* minimumRoot();
     
 
