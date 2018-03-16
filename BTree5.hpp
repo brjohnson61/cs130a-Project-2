@@ -18,7 +18,10 @@ class BTree5 {
         void rangeSearch(string word1, string word2);
         void getHeight(BTreeNode* root, int depth);
         void balanceInsertNode(BTreeNode* root);
-        void balanceDeleteNode(BTreeNode* root);
+        void balanceLeafWithParent(int child, BTreeNode* parent);
+        void borrowFromRight(int keyIndex, BTreeNode* parent);
+        void borrowFromLeft(int keyIndex, BTreeNode* parent);
+        void mergeChildrenFromKey(int keyIndex, BTreeNode* parent);
         ~BTree5();
 
 
