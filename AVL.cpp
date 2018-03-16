@@ -157,28 +157,28 @@ AVL* AVL::rotateLeft(){
 
     if(this->right->getLeft() != NULL){
         childSwitch = this->right->getLeft();
-        cout << "assigned child root in rotation" << endl;
+        // cout << "assigned child root in rotation" << endl;
     }
 
     this->right = childSwitch;
     this->setBalanceAndHeight();
-    cout << "assigned child to old root" << endl;
+    // cout << "assigned child to old root" << endl;
 
     nextRoot->setLeft(this);
     nextRoot->setBalanceAndHeight();
 
-    cout << "New root: " << nextRoot->getRoot()->getWord() << endl;
+    // cout << "New root: " << nextRoot->getRoot()->getWord() << endl;
     if(nextRoot->getLeft() == NULL){
-        cout << "New left: NULL" << endl;
+        // cout << "New left: NULL" << endl;
     }
     else{
-        cout << "New left: " << nextRoot->getLeft()->getRoot()->getWord() << endl;
+        // cout << "New left: " << nextRoot->getLeft()->getRoot()->getWord() << endl;
     }
     if(nextRoot->getRight() == NULL){
-        cout << "New right: NULL" << endl;
+        // cout << "New right: NULL" << endl;
     }
     else{
-        cout << "New right: " << nextRoot->getRight()->getRoot()->getWord() << endl;
+        // cout << "New right: " << nextRoot->getRight()->getRoot()->getWord() << endl;
     }
 
     return nextRoot;
