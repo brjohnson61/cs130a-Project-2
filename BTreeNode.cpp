@@ -91,4 +91,12 @@ bool BTreeNode::isFull(){
     
 }
 
+int deleteChildAt(int index){
+    
+}
+
+int insertChildAt(int index){
+
+}
+
 
