@@ -3,6 +3,8 @@
         "chrono": "cpp",
         "xutility": "cpp",
         "iostream": "cpp",
-        "xiosbase": "cpp"
+        "xiosbase": "cpp",
+        "ostream": "cpp",
+        "ios": "cpp"
     }
 }

@@ -329,7 +329,7 @@ AVL* AVL::deleteNode(string word){
         }
         if(this->right==NULL && this->left==NULL){
                 // cout << "word found:  " << word << "  - Both roots NULL" << endl;
-                delete this->root;
+                delete this;
                 return NULL;
         }
         else if((this->getRight() == NULL) != (this->left == NULL)){
@@ -345,13 +345,17 @@ AVL* AVL::deleteNode(string word){
                 temp = this->right;
                 this->right = NULL;
             }
-            this->root = temp->getRoot();
+            this->root->setWord(temp->getRoot()->getWord());
+            this->root->setCount(temp->getRoot()->getCount());
             this->right = temp->getRight();
             this->left = temp->getLeft();
-            delete temp->getRoot();
+            //delete temp->getRoot();
             temp->setRight(NULL);
             temp->setLeft(NULL);
+
+            // cout<< "Checkpoint" << endl;
             delete temp;
+            temp = NULL;
         }
         else{
             AVL* temp = this->right->minimumRoot();
@@ -436,17 +440,25 @@ void AVL::sortTree(){
     }
 }
 
-void AVL::rangeSearchTree(string upperBound, string lowerBound){
-    if(this->root->getWord() >= upperBound && this->root->getWord() <= lowerBound){
-        this->left->rangeSearchTree(upperBound, lowerBound);
+void AVL::rangeSearchTree(string begin, string end){
+    if(this->root->getWord() >= begin && this->root->getWord() <= end){
+        if(this->left != NULL){
+            this->left->rangeSearchTree(begin, end);
+        }
         cout << this->root->getWord() << endl;
-        this->right->rangeSearchTree(upperBound, lowerBound);
+        if(this->right != NULL){
+            this->right->rangeSearchTree(begin, end);
+        }
     }
-    else if(this->root->getWord() >= lowerBound){
-        this->left->rangeSearchTree(upperBound, lowerBound);
+    else if(this->root->getWord() > end){
+        if(this->left !=NULL){
+            this->left->rangeSearchTree(begin, end);
+        }
     }
-    else{
-        this->right->rangeSearchTree(upperBound, lowerBound);
+    else if(this->root->getWord() < begin){
+        if(this->right != NULL){
+            this->right->rangeSearchTree(begin, end);
+        }
     }
 }
 
