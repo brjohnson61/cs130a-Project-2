@@ -106,7 +106,7 @@ int main(){
                 
  
                 auto start1 = chrono::high_resolution_clock::now();  
-                bt4bool = (bTree->searchWord(inp1) != nullptr)? true : false;
+                bt4bool = (bTree->searchWord(inp1, bTree->getRoot()) != nullptr)? true : false;
                 auto finish1 = chrono::high_resolution_clock::now();
                 chrono::duration<double> elapsed1 = finish1 - start1;
                 
@@ -295,7 +295,6 @@ void BTreeTesting(){
     tree->deleteWord("zzz", tree->getRoot());
     tree->deleteWord("bones", tree->getRoot());
     tree->deleteWord("zorro", tree->getRoot());
-
     
     cout << endl<< endl;
     
@@ -304,8 +303,9 @@ void BTreeTesting(){
 
     tree->sortWords(tree->getRoot()); 
     tree->getHeight(tree->getRoot(), 0);
-    cout << "After height " << endl << endl;
-
+    
+    BTreeNode* temp = tree->searchWord("wet", tree->getRoot());
+    cout << "Search pointer " << temp << endl;
 
 
      //tree->deleteWord("zorro", tree->getRoot());

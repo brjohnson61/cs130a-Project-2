@@ -198,17 +198,19 @@ void BTree5::deleteWord(string word, BTreeNode* root){
     }
     cout << "Get end of array" << endl;
     cout << "" << endl;
+    if (root->numKeys >= 1){
     if (temp > root->keys[root->numKeys-1]){
-        cout << "Gets called" << ""<< endl <<  endl;
-        cout << "root->key[root->numkeys] " << root->keys[root->numKeys].getWord()<< endl; 
-         if (root->children[root->numKeys]->isLeaf == true){
-                int search = root->children[root->numKeys]->searchNode(temp);
-                if (search >= 0){
-                    balanceLeafWithParent(root->numKeys, root);
+            cout << "Gets called" << ""<< endl <<  endl;
+            cout << "root->key[root->numkeys] " << root->keys[root->numKeys].getWord()<< endl; 
+            if (root->children[root->numKeys]->isLeaf == true){
+                    int search = root->children[root->numKeys]->searchNode(temp);
+                    if (search >= 0){
+                        balanceLeafWithParent(root->numKeys, root);
+                    }
                 }
-            }
-        deleteWord(word,root->children[root->numKeys]);
-        return;
+            deleteWord(word,root->children[root->numKeys]);
+            return;
+        }
     }
 }
 
@@ -227,12 +229,44 @@ void BTree5::sortWords(BTreeNode* root){
     }
 }
 
-BTreeNode* BTree5::searchWord(string word){
+BTreeNode* BTree5::searchWord(string word, BTreeNode* root){
+    Node temp = Node(word);
+    if (root != nullptr){
+        for(int i = 0; i < root->numKeys; i ++){
+            if (temp < root->keys[i]){
+                return searchWord(word, root->children[i]);
+            }else if(temp == root->keys[i]){
+                return root;
+            }
+        }
+        
+        if ((root->numKeys >= 1)&& (temp > root->keys[root->numKeys])){
+            return searchWord(word, root->children[root->numKeys]);
+        }
+    }
     return nullptr;
+    
 }
 
-void BTree5::rangeSearch(string word1, string word2){
-
+void BTree5::rangeSearch(string word1, string word2, BTreeNode* root){
+    Node temp1 = Node(word1);
+    Node temp2 = Node(word2);
+    //if (root in range call all nodes)
+    if (root!= nullptr){
+        if (root->isLeaf != true){
+            for (int i = 0; i < root->numKeys; i ++){
+                if(temp1 <= root->keys[i] && temp2 >= root->keys[i]) {
+                    cout << root->key[i].getWord() << endl;
+                    rangeSearch(word1,word2,root->children[i]);
+                    rangeSearch(word1,word2,root->children[i+1]);
+                } 
+                
+            }
+            if (root->numKeys >= 1) && temp1 <= root->keys[i] && temp2 >= root->keys[i] ){
+                rangeSearch(word1,word2,root->children[root->numKeys])
+            }
+        }
+    }
 }
 
 void BTree5::balanceInsertNode(BTreeNode* root){
