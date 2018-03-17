@@ -44,7 +44,7 @@ void BTree5::insertWord(string word, BTreeNode* root){
             
         }else{
             if (root->numKeys == 4){
-                cout << "Node is full" << endl;
+                // cout << "Node is full" << endl;
             }else{
                 int index = root->insertNode(temp);
                 
@@ -59,34 +59,34 @@ void BTree5::insertWord(string word, BTreeNode* root){
 void BTree5::deleteWord(string word, BTreeNode* root){
     Node temp = Node(word);
     const int numKeys0 = root->numKeys;
-    cout << "Num of keys : " << root->numKeys << "word: " << word<<endl;
+    // cout << "Num of keys : " << root->numKeys << "word: " << word<<endl;
     for (int i = 0; i < numKeys0; i++){
         if (temp < root->keys[i]){
-            cout << "This executes" << endl;
+            // cout << "This executes" << endl;
             if (root->isLeaf != true){
-                cout << "Root is not leaf" << endl;
+                // cout << "Root is not leaf" << endl;
                 if (root->children[i]->isLeaf == true){
-                    cout << "Children of i: " << i << " is leaf: " << root->children[i]->isLeaf <<endl;
+                    // cout << "Children of i: " << i << " is leaf: " << root->children[i]->isLeaf <<endl;
                     int search = root->children[i]->searchNode(temp);
                     if (search >= 0){
-                        cout << "Search was sucessfull: "<< search << endl;
+                        // cout << "Search was sucessfull: "<< search << endl;
                         balanceLeafWithParent(i, root);
                        
                     }
                 }
             }
             
-            cout << "Gonna delete word now" << endl;
+            // cout << "Gonna delete word now" << endl;
             
             //getHeight(this->root,0);
-            cout << "Keys rn: " << root->numKeys << endl;
-            cout << "Keys before : "  << numKeys0 << endl;
+            // cout << "Keys rn: " << root->numKeys << endl;
+            // cout << "Keys before : "  << numKeys0 << endl;
 
             if (root->isLeaf != true){
                 if ( numKeys0 - root->numKeys > 0 ){
                     if (i-1 >= 0){
                         deleteWord(word, root->children[i-1]);
-                        cout << "In the midde of both" << endl;
+                        // cout << "In the midde of both" << endl;
                         deleteWord(word, root->children[i]);
                     }
                     // for(int i = 0; i < root->numKeys; i++){
@@ -101,36 +101,36 @@ void BTree5::deleteWord(string word, BTreeNode* root){
                     //getHeight(this->root,0);
                     //this->deleteWord(word, root->children[i-2]);
                 }else{
-                    cout << "calling delete one more time"<< endl;
+                    // cout << "calling delete one more time"<< endl;
                     
                     this->deleteWord(word, root->children[i]);
                 }
             }
             
-            cout << "Done deleting word" << endl;
+            // cout << "Done deleting word" << endl;
             return;
         }else if (temp == root->keys[i]){
             if (root->isLeaf){
-                cout << "Root is leaf" << endl;
+                // cout << "Root is leaf" << endl;
                 if (root->numKeys <= 1){
-                    cout << "Should happen only if root->numkeys = 1"<< endl;
+                    // cout << "Should happen only if root->numkeys = 1"<< endl;
                     if ((root == this->root) && (root->numKeys == 1)){
                         
                         this->root = nullptr;
-                        cout << "deleted last item on tree" << endl; 
+                        // cout << "deleted last item on tree" << endl; 
                     }
                     return;
                 }else{
                     root->deleteNode(temp);
-                    cout << "Done deleting " << temp.getWord() << endl;
+                    // cout << "Done deleting " << temp.getWord() << endl;
                     return;
                 }
             }else{
                 if (root->numKeys <= 1 ){
                     //shouldnt happen
-                    cout << "Shouldnt happen" << endl;
+                    // cout << "Shouldnt happen" << endl;
                 }else{
-                    cout << "Trying to delete " << word << endl; 
+                    // cout << "Trying to delete " << word << endl; 
                     if ((root->children[i]->numKeys > 2) || (root->children[i+1]->numKeys > 2)){
                         if (root->children[i]->numKeys > root->children[i+1]->numKeys ){
                             if (root->children[i]->numKeys == 3){
@@ -148,7 +148,7 @@ void BTree5::deleteWord(string word, BTreeNode* root){
                                 return;
                             }
                         }else{
-                            cout <<"Children i + 1 " << i+1 << " has more children" << endl; 
+                            // cout <<"Children i + 1 " << i+1 << " has more children" << endl; 
                             if (root->children[i+1]->numKeys == 3){
                                 int index = 0;
                                 root->insertNode(root->children[i+1]->keys[index]);
@@ -157,7 +157,7 @@ void BTree5::deleteWord(string word, BTreeNode* root){
                                 return;
                             }
                             if (root->children[i+1]->numKeys==4){
-                                cout << "Has four children" << endl;
+                                // cout << "Has four children" << endl;
                                 int index = 0;
                                 root->insertNode(root->children[i+1]->keys[index]);
                                 this->deleteWord(root->children[i+1]->keys[index].getWord(), root->children[i+1]);
@@ -169,7 +169,7 @@ void BTree5::deleteWord(string word, BTreeNode* root){
                     }else{
                         root->deleteNode(temp);
                         BTreeNode* temp0 = root->children[i];
-                        cout << "One children has atleast one one child or both child hace two"<< endl;
+                        // cout << "One children has atleast one one child or both child hace two"<< endl;
                         for (int k = 0; k< root->children[i]->numKeys; k++){
                             root->children[i+1]->children[root->children[i+1]->numKeys+1] = root->children[i]->children[k];
                             root->children[i+1]->insertNode(root->children[i]->keys[k]);
@@ -196,12 +196,12 @@ void BTree5::deleteWord(string word, BTreeNode* root){
         } 
     
     }
-    cout << "Get end of array" << endl;
-    cout << "" << endl;
+    // cout << "Get end of array" << endl;
+    // cout << "" << endl;
     if (root->numKeys >= 1){
     if (temp > root->keys[root->numKeys-1]){
-            cout << "Gets called" << ""<< endl <<  endl;
-            cout << "root->key[root->numkeys] " << root->keys[root->numKeys].getWord()<< endl; 
+            // cout << "Gets called" << ""<< endl <<  endl;
+            // cout << "root->key[root->numkeys] " << root->keys[root->numKeys].getWord()<< endl; 
             if (root->children[root->numKeys]->isLeaf == true){
                     int search = root->children[root->numKeys]->searchNode(temp);
                     if (search >= 0){
@@ -255,15 +255,15 @@ void BTree5::rangeSearch(string word1, string word2, BTreeNode* root){
     if (root!= nullptr){
         if (root->isLeaf != true){
             for (int i = 0; i < root->numKeys; i ++){
-                if(temp1 <= root->keys[i] && temp2 >= root->keys[i]) {
-                    cout << root->key[i].getWord() << endl;
+                if((temp1.getWord() <= root->keys[i].getWord()) && (temp2.getWord() >= root->keys[i].getWord())) {
+                    cout << root->keys[i].getWord() << endl;
                     rangeSearch(word1,word2,root->children[i]);
                     rangeSearch(word1,word2,root->children[i+1]);
                 } 
                 
             }
-            if (root->numKeys >= 1) && temp1 <= root->keys[i] && temp2 >= root->keys[i] ){
-                rangeSearch(word1,word2,root->children[root->numKeys])
+            if ((root->numKeys >= 1)&& (temp1.getWord() <= root->keys[root->numKeys].getWord()) && (temp2.getWord() >= root->keys[root->numKeys].getWord()) ){
+                rangeSearch(word1,word2,root->children[root->numKeys]);
             }
         }
     }
@@ -384,7 +384,7 @@ void BTree5::balanceInsertNode(BTreeNode* root){
 }
 
 void BTree5::borrowFromRight(int keyIndex, BTreeNode* parent){
-    cout << "Borrow from right getting called" << endl;
+    // cout << "Borrow from right getting called" << endl;
     
     if (parent->children[keyIndex]->isLeaf == true){
         Node temp;
@@ -399,7 +399,7 @@ void BTree5::borrowFromRight(int keyIndex, BTreeNode* parent){
 }
 
 void BTree5::borrowFromLeft(int keyIndex, BTreeNode* parent){
-    cout << "Borrow from left getting called" << endl;
+    // cout << "Borrow from left getting called" << endl;
     
     if (parent->children[keyIndex]->isLeaf == true){
         Node temp;
@@ -416,7 +416,7 @@ void BTree5::borrowFromLeft(int keyIndex, BTreeNode* parent){
 
 void BTree5::mergeChildrenFromKey(int keyIndex, BTreeNode* parent){
     
-    cout << "Merged called" << "on word: "<< parent->keys[keyIndex].getWord()<< "keyIndex "<< keyIndex<<  endl;
+    // cout << "Merged called" << "on word: "<< parent->keys[keyIndex].getWord()<< "keyIndex "<< keyIndex<<  endl;
     if (parent ->children[keyIndex]->isLeaf == true){
         BTreeNode * tempPtr = nullptr;
         int initialParentNumKeys = parent->numKeys;
@@ -482,10 +482,10 @@ void BTree5::balanceLeafWithParent(int child, BTreeNode* parent){
 
 void BTree5::getHeight(BTreeNode* root, int depth){
     if (root != nullptr ){
-        cout << "Number Of Keys: " << root->numKeys << " Depth " << depth << endl;
-        cout << "Is Leaf = " << root->isLeaf << endl;
+        // cout << "Number Of Keys: " << root->numKeys << " Depth " << depth << endl;
+        // cout << "Is Leaf = " << root->isLeaf << endl;
         for(int i= 0; i <root->numKeys; i++){
-            cout << "Key [" << i << "] : " << root->keys[i].getWord() << " Depth: "<< depth << endl;
+            // cout << "Key [" << i << "] : " << root->keys[i].getWord() << " Depth: "<< depth << endl;
         }
         for(int i = 0; i < root->numKeys ; i ++){
             getHeight(root->children[i], depth+1);

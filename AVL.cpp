@@ -59,7 +59,6 @@ AVL::~AVL(){
     }
     this->balance = 0;
     this->height = 0;
-    delete this;
 }
 
 bool AVL::operator=(AVL& rhs){
@@ -120,29 +119,29 @@ AVL* AVL::rotateRight(){
     AVL* childSwitch = NULL;
     if(this->left->getRight() != NULL){
         childSwitch = this->left->getRight();
-        cout << "assigned child root in rotation" << endl;
+        // cout << "assigned child root in rotation" << endl;
     }
 
     this->left = childSwitch;
     this->setBalanceAndHeight();
-    cout << "assigned child to old root" << endl;
+    // cout << "assigned child to old root" << endl;
     
     nextRoot->setRight(this);
     nextRoot->setBalanceAndHeight();
 
-    cout << "New root: " << nextRoot->getRoot()->getWord() << endl;
-    if(nextRoot->getLeft() == NULL){
-        cout << "New left: NULL" << endl;
-    }
-    else{
-        cout << "New left: " << nextRoot->getLeft()->getRoot()->getWord() << endl;
-    }
-    if(nextRoot->getRight() == NULL){
-        cout << "New right: NULL" << endl;
-    }
-    else{
-        cout << "New right: " << nextRoot->getRight()->getRoot()->getWord() << endl;
-    }
+    // cout << "New root: " << nextRoot->getRoot()->getWord() << endl;
+    // if(nextRoot->getLeft() == NULL){
+    //     // cout << "New left: NULL" << endl;
+    // }
+    // else{
+    //     // cout << "New left: " << nextRoot->getLeft()->getRoot()->getWord() << endl;
+    // }
+    // if(nextRoot->getRight() == NULL){
+    //     // cout << "New right: NULL" << endl;
+    // }
+    // else{
+    //     // cout << "New right: " << nextRoot->getRight()->getRoot()->getWord() << endl;
+    // }
 
     return nextRoot;
 }

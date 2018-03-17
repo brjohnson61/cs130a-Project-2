@@ -23,7 +23,7 @@ void cleanParse(string& s);
 void BTreeTesting();
 
 int main(){
-    BTreeTesting();
+    //BTreeTesting();
 
     AVL* tree = new AVL();
     BTree5* bTree = new BTree5();
@@ -43,8 +43,8 @@ int main(){
         while(inFile >> load){
             cleanParse(load);
             if(load != ""){
-                //tree = tree->insertNode(load);
-                //bTree->insertWord(load, bTree->getRoot());
+                tree = tree->insertNode(load);
+                bTree->insertWord(load, bTree->getRoot());
                 //wordCount++;
             }
         }
@@ -52,51 +52,51 @@ int main(){
     }
     
     
-    bTree->sortWords(bTree->getRoot());
+    // bTree->sortWords(bTree->getRoot());
     
-    cout << "Option 1: Test complexity and timing" << endl;
-    cout << "Option 2: Regular output" << endl;
+    // cout << "Option 1: Test complexity and timing" << endl;
+    // cout << "Option 2: Regular output" << endl;
 
-    string navigation = "";
-    cin >> navigation;
+    // string navigation = "";
+    // cin >> navigation;
 
-    if(navigation == "1"){
-        ifstream inFile("testWords.txt");
-        string load = "";
-        wordCount = 0;
-        auto startTimeTest = chrono::high_resolution_clock::now();
-        while(inFile >> load){
-            cleanParse(load);
-            if(load != ""){
-                if(wordCount == 1000){
-                    break;
-                }
-                tree = tree->insertNode(load);
-                //bTree->insertWord(load, bTree->getRoot());
-                wordCount++;
-            }
-        }
-        auto finishTimeTest = chrono::high_resolution_clock::now();
-        inFile.close();
-        chrono::duration<double> elapsedTimeTest = finishTimeTest - startTimeTest;
-        cout << "Timing Test: " << elapsedTimeTest.count() << " s" << endl;
-    }
+    // if(navigation == "1"){
+    //     ifstream inFile("testWords.txt");
+    //     string load = "";
+    //     wordCount = 0;
+    //     auto startTimeTest = chrono::high_resolution_clock::now();
+    //     while(inFile >> load){
+    //         cleanParse(load);
+    //         if(load != ""){
+    //             if(wordCount == 1000){
+    //                 break;
+    //             }
+    //             tree = tree->insertNode(load);
+    //             //bTree->insertWord(load, bTree->getRoot());
+    //             wordCount++;
+    //         }
+    //     }
+    //     auto finishTimeTest = chrono::high_resolution_clock::now();
+    //     inFile.close();
+    //     chrono::duration<double> elapsedTimeTest = finishTimeTest - startTimeTest;
+    //     cout << "Timing Test: " << elapsedTimeTest.count() << " s" << endl;
+    // }
 
 
-    cout << "Begin Final Turnin Select Menu" << endl;
+    // cout << "Begin Final Turnin Select Menu" << endl;
 
     while(1){
 
-        cout << "Option 1: Search" << endl;
-        cout << "Option 2: Insert" << endl;
-        cout << "Option 3: Delete" << endl;
-        cout << "Option 4: Sort" << endl;
-        cout << "Option 5: Range Search" << endl;
+        // cout << "Option 1: Search" << endl;
+        // cout << "Option 2: Insert" << endl;
+        // cout << "Option 3: Delete" << endl;
+        // cout << "Option 4: Sort" << endl;
+        // cout << "Option 5: Range Search" << endl;
 
         cin >> func; 
         if(func == "1"){
                 bool bt4bool, bbool;
-                cout << "Enter word to search for: " << endl;
+                //cout << "Enter word to search for: " << endl;
                 cin >> inp1;
                 
                 auto start0 = chrono::high_resolution_clock::now();
@@ -110,14 +110,14 @@ int main(){
                 auto finish1 = chrono::high_resolution_clock::now();
                 chrono::duration<double> elapsed1 = finish1 - start1;
                 
-                (bbool || bt4bool) ? cout<< "true" : cout << "false";
+                (bbool) ? cout<< "true" : cout << "false";
                 cout << endl;
 
                 cout << "AVL: " << elapsed0.count() << " s" << endl;
                 cout << "2-5: " << elapsed1.count() << " s" << endl;  
         }
         else if(func == "2"){
-                cout << "Enter word to insert: " << endl;
+                // cout << "Enter word to insert: " << endl;
                 cin >> inp1;
 
                 auto start0 = chrono::high_resolution_clock::now();
@@ -134,7 +134,7 @@ int main(){
                 cout << "2-5: " << elapsed1.count() << endl;
         }
         else if(func == "3"){
-            cout << "Enter word to delete: " << endl;
+            // cout << "Enter word to delete: " << endl;
             cin >> inp1;
                 
             auto start0 = chrono::high_resolution_clock::now();
@@ -170,10 +170,10 @@ int main(){
             cout << "2-5: " << elapsed1.count() << "s" << endl;
         }
         else if(func == "5"){
-            cout << "Enter two words for ranged search." << endl;
-            cout << "First word (lower bound): " << endl;
+            // cout << "Enter two words for ranged search." << endl;
+            // cout << "First word (lower bound): " << endl;
             cin >> inp1;
-            cout << "Second word (upper bound): " << endl;
+            // cout << "Second word (upper bound): " << endl;
             cin >> inp2;
                 
             auto start0 = chrono::high_resolution_clock::now();
@@ -184,7 +184,7 @@ int main(){
             cout << endl << endl;
 
             auto start1 = chrono::high_resolution_clock::now();
-            bTree->rangeSearch(inp1, inp2);
+            bTree->rangeSearch(inp1, inp2, bTree->getRoot());
             auto finish1 = chrono::high_resolution_clock::now();
             chrono::duration<double> elapsed1 = finish1 - start1;
 
