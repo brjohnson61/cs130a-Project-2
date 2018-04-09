@@ -166,19 +166,19 @@ AVL* AVL::rotateLeft(){
     nextRoot->setLeft(this);
     nextRoot->setBalanceAndHeight();
 
-    // cout << "New root: " << nextRoot->getRoot()->getWord() << endl;
-    if(nextRoot->getLeft() == NULL){
-        // cout << "New left: NULL" << endl;
-    }
-    else{
-        // cout << "New left: " << nextRoot->getLeft()->getRoot()->getWord() << endl;
-    }
-    if(nextRoot->getRight() == NULL){
-        // cout << "New right: NULL" << endl;
-    }
-    else{
-        // cout << "New right: " << nextRoot->getRight()->getRoot()->getWord() << endl;
-    }
+    // // cout << "New root: " << nextRoot->getRoot()->getWord() << endl;
+    // if(nextRoot->getLeft() == NULL){
+    //     // cout << "New left: NULL" << endl;
+    // }
+    // else{
+    //     // cout << "New left: " << nextRoot->getLeft()->getRoot()->getWord() << endl;
+    // }
+    // if(nextRoot->getRight() == NULL){
+    //     // cout << "New right: NULL" << endl;
+    // }
+    // else{
+    //     // cout << "New right: " << nextRoot->getRight()->getRoot()->getWord() << endl;
+    // }
 
     return nextRoot;
 }

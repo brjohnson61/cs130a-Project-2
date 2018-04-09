@@ -187,7 +187,7 @@ void BTree5::deleteWord(string word, BTreeNode* root){
                                 temp0->children[d+1] = nullptr;
                             }
                         }
-                        temp0->~BTreeNode();
+                        //temp0->~BTreeNode();
 
                      }
 
@@ -222,7 +222,7 @@ void BTree5::sortWords(BTreeNode* root){
         if (root->numKeys != 0){
             for (int i= 0; i < root->numKeys; i++){
                 this->sortWords(root->children[i]);
-                cout << root->keys[i].getWord() << endl;
+                outputToFile(root->keys[i].getWord(), "output.txt");
             }
             sortWords(root->children[root->numKeys]);
         }
@@ -255,15 +255,18 @@ void BTree5::rangeSearch(string word1, string word2, BTreeNode* root){
     if (root!= nullptr){
         if (root->isLeaf != true){
             for (int i = 0; i < root->numKeys; i ++){
-                if((temp1.getWord() <= root->keys[i].getWord()) && (temp2.getWord() >= root->keys[i].getWord())) {
+                rangeSearch(word1,word2,root->children[i]);
+                if((temp1.getWord() <= root->keys[i].getWord()) && (temp2.getWord() >= root->keys[i].getWord())){
                     cout << root->keys[i].getWord() << endl;
-                    rangeSearch(word1,word2,root->children[i]);
-                    rangeSearch(word1,word2,root->children[i+1]);
+                    
                 } 
                 
             }
-            if ((root->numKeys >= 1)&& (temp1.getWord() <= root->keys[root->numKeys].getWord()) && (temp2.getWord() >= root->keys[root->numKeys].getWord()) ){
+            if (root->numKeys >= 1){
                 rangeSearch(word1,word2,root->children[root->numKeys]);
+                if ((temp1.getWord() <= root->keys[root->numKeys].getWord()) && (temp2.getWord() >= root->keys[root->numKeys].getWord())){
+                cout << root->keys[root->numKeys].getWord() << endl;
+                }
             }
         }
     }
